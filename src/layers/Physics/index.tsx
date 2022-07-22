@@ -1,6 +1,8 @@
-import { PhysicsProps as ProviderProps } from "@react-three/cannon";
+import {
+  PhysicsProps as ProviderProps,
+  Physics as PhysicsProvider,
+} from "@react-three/cannon";
 import { ReactNode } from "react";
-import { Physics as PhysicsProvider } from "@react-three/cannon";
 
 const defaultPhysicsProps: Partial<ProviderProps> = {
   size: 50,
@@ -16,6 +18,8 @@ type PhysicsLayerProps = { children: ReactNode | ReactNode[] } & PhysicsProps;
 
 export function Physics(props: PhysicsLayerProps) {
   const { children, ...physicsProps } = props;
+
+  console.log("physics-rerender");
 
   return (
     <PhysicsProvider {...defaultPhysicsProps} {...physicsProps}>

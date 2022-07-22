@@ -36,21 +36,19 @@ export function Environment(props: EnvironmentLayerProps) {
   const state = useEnvironmentState(name);
 
   return (
-    <>
+    <Container ref={state.containerRef}>
       <GlobalStyles />
-      <Container ref={state.containerRef}>
+      <EnvironmentContext.Provider value={state}>
+        {loadingScreen || <LoadingScreen />}
+        {pauseMenu || <PauseMenu dev={dev} title={name} />}
+        <Crosshair />
+      </EnvironmentContext.Provider>
+      <VRCanvas {...defaultCanvasProps} {...canvasProps}>
         <EnvironmentContext.Provider value={state}>
-          {loadingScreen || <LoadingScreen />}
-          {pauseMenu || <PauseMenu dev={dev} title={name} />}
-          <Crosshair />
+          <RegisterMenuItems />
+          {children}
         </EnvironmentContext.Provider>
-        <VRCanvas {...defaultCanvasProps} {...canvasProps}>
-          <EnvironmentContext.Provider value={state}>
-            <RegisterMenuItems />
-            {children}
-          </EnvironmentContext.Provider>
-        </VRCanvas>
-      </Container>
-    </>
+      </VRCanvas>
+    </Container>
   );
 }

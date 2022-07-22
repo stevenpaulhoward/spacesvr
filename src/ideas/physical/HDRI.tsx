@@ -11,7 +11,7 @@ type HDRIProps = {
 };
 
 export function HDRI(props: HDRIProps) {
-  const { src, size = 1204, disableBackground, disableEnvironment } = props;
+  const { src, size = 1024, disableBackground, disableEnvironment } = props;
 
   const { gl, scene } = useThree();
 
